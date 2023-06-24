@@ -1,0 +1,103 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Armourbl_CalculatorEC.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="TextColor" Value="black" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="WidthRequest" Value="60" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+            
+            <Style x:Key="LightFunctionButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="#c34834" />
+            </Style>
+            <Style x:Key="DarkFunctionButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="#e01f2c" />
+            </Style>
+            
+            <Style x:Key="LightNumberButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="#8ccfa7"  />
+            </Style>
+            <Style x:Key="DarkNumberButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="#bdbdbd" />
+            </Style>
+            
+            <Style x:Key="LightOperatorButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="#e98231" />
+            </Style>
+            
+            <Style x:Key="DarkOperatorButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="#ed7402"  />
+            </Style>
+
+            <Style x:Key="NumberButtonStyle" TargetType="Button" BasedOn="{StaticResource LightNumberButtonStyle}" />
+            <Style x:Key="OperatorButtonStyle" TargetType="Button" BasedOn="{StaticResource LightOperatorButtonStyle}" />
+            <Style x:Key="FunctionButtonStyle" TargetType="Button" BasedOn="{StaticResource LightFunctionButtonStyle}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="Thickness">
+                    <OnIdiom.Phone>0</OnIdiom.Phone>
+                    <OnIdiom.Tablet>0</OnIdiom.Tablet>
+                </OnIdiom>
+            </On>
+            <On Platform="Default">
+                <OnIdiom x:TypeArguments="Thickness">
+                    <OnIdiom.Phone>0</OnIdiom.Phone>
+                    <OnIdiom.Tablet>0</OnIdiom.Tablet>
+                </OnIdiom>
+            </On>
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <Grid x:Name="grid" RowSpacing="10" ColumnSpacing="10" Padding="25,140,25,50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.ColumnSpan="4" x:Name="result" Text="" VerticalOptions="CenterAndExpand" HorizontalOptions="End" FontSize="48" TextColor="#bdbdbd" />
+
+        <Button Style="{StaticResource DarkFunctionButtonStyle}" Grid.Row="1" Grid.Column="0" Text="AC" Clicked="OnClear" />
+        <Button Style="{StaticResource DarkFunctionButtonStyle}" Grid.Row="1" Grid.Column="1" Text="+/-" Clicked="OnSelectOperator" />
+        <Button Style="{StaticResource DarkFunctionButtonStyle}" Grid.Row="1" Grid.Column="2" Text="%" Clicked="OnSelectOperator" />
+        <Button Style="{StaticResource DarkOperatorButtonStyle}" Grid.Row="1" Grid.Column="3" Text="÷" Clicked="OnSelectOperator" />
+
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="2" Grid.Column="0" Text="7" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="2" Grid.Column="1" Text="8" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="2" Grid.Column="2" Text="9" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkOperatorButtonStyle}" Grid.Row="2" Grid.Column="3" Text="x" Clicked="OnSelectOperator" />
+
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="3" Grid.Column="0" Text="4" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="3" Grid.Column="1" Text="5" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="3" Grid.Column="2" Text="6" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkOperatorButtonStyle}" Grid.Row="3" Grid.Column="3" Text="-" Clicked="OnSelectOperator" />
+
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="4" Grid.Column="0" Text="1" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="4" Grid.Column="1" Text="2" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="4" Grid.Column="2" Text="3" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkOperatorButtonStyle}" Grid.Row="4" Grid.Column="3" Text="+" Clicked="OnSelectOperator" />
+
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="5" Grid.Column="0" Text="0" Grid.ColumnSpan="2" Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkNumberButtonStyle}" Grid.Row="5" Grid.Column="2" Text="." Clicked="OnSelectNumber" />
+        <Button Style="{StaticResource DarkOperatorButtonStyle}" Grid.Row="5" Grid.Column="3" Text="=" Clicked="OnCalculate" />
+    </Grid>
+</ContentPage>
